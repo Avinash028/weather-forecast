@@ -1,0 +1,120 @@
+<?php
+
+ $final="";
+ $error="";
+$city="";
+
+
+
+if($_GET['city'])
+{  
+
+    $_GET['city']=str_replace(' ', '', $_GET['city']);
+
+    $file_headers = @get_headers("https://www.weather-forecast.com/locations/".$_GET['city']."/forecasts/latest");
+if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found') {
+    $exists = false;
+    $error="City not Found.";
+}
+
+else {
+    
+    $get=$_GET['city'];
+	$fp=file_get_contents("https://www.weather-forecast.com/locations/$get/forecasts/latest");
+ 	//echo $fp;
+
+ 	$news=explode('</h2>(1&ndash;3 days)</span><p class="b-forecast__table-description-content"><span class="phrase">', $fp);
+
+
+ 	$news2=explode('</span></p></td>', $news[1]);
+ 	
+    $final= $news2[0];
+  
+
+}
+}
+
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Weather Forcast</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+<style type="text/css">
+	
+   .container {
+   	width: 600px;
+   }
+
+   #box {
+   	text-align: center;
+   	margin-top: 180px;
+   }
+
+   #show {
+   	margin-top: 50px;
+   }
+</style>
+</head>
+<body>
+
+	<div class="container">
+		<div id="box">
+		<h1>What's The Weather?</h1>
+     
+     <form >
+  <div class="form-group">
+    <label for="exampleInputEmail1"><p class="lead">Enter City Name.</p></label>
+    <input  class="form-control" id="exampleInputEmail1" placeholder="Delhi,London" name="city" >
+
+    
+  </div>
+  
+  
+  
+  
+  
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<p class="lead" id="city">
+	
+
+</p>
+
+<div id="show">
+	<?php
+
+      if($final)
+      {
+      	echo '<div class="alert alert-success" role="alert">
+            '.$final.'
+</div>';
+      }
+
+      else if($error)
+      {
+      	echo '<div class="alert alert-danger" role="alert">
+            '.$error.'
+</div>';
+      }
+
+	?>
+
+</div>
+
+</div>
+
+	</div>
+
+<script type="text/javascript">
+	
+
+	
+
+</script>
+</body>
+</html>
