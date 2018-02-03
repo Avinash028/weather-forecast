@@ -6,7 +6,7 @@ $city="";
 
 
 
-if($_GET['city'])
+if(array_key_exists('city', $_GET))
 {  
 
     $_GET['city']=str_replace(' ', '', $_GET['city']);
@@ -68,7 +68,7 @@ else {
      <form >
   <div class="form-group">
     <label for="exampleInputEmail1"><p class="lead">Enter City Name.</p></label>
-    <input  class="form-control" id="exampleInputEmail1" placeholder="Delhi,London" name="city" >
+    <input  class="form-control" id="exampleInputEmail1" placeholder="Delhi,London" name="city" value="<?php echo $_GET['city']; ?>">
 
     
   </div>
