@@ -68,7 +68,7 @@ else {
      <form >
   <div class="form-group">
     <label for="exampleInputEmail1"><p class="lead">Enter City Name.</p></label>
-    <input  class="form-control" id="exampleInputEmail1" placeholder="Delhi,London" name="city" value="<?php echo $_GET['city']; ?>">
+    <input  class="form-control" id="exampleInputEmail1" placeholder="Delhi,London" name="city">
 
     
   </div>
